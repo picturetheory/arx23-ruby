@@ -7,7 +7,7 @@
 
 Suits = ["Flasks","Sabers","Staves","Coins"]
 Ranks = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"]
-$d = [] # Creates the global "d" array for the deck
+$deck = [] # Creates the global "deck" array for the deck
 
 class Card
   include Enumerable 
@@ -43,7 +43,7 @@ class Card
     end
 
     def to_s
-      "{display_rank} of {@suit}, value {value}"
+      "#{display_rank} of #{@suit}, value #{value}" # Okay, how do I show this in the way I want it to be formatted?
     end
 end
 
@@ -63,9 +63,6 @@ class Deck
   def draw
     @cards.pop # Remove last element of array, return removed element
   end
-  def remaining
-    @cards.length
-  end
 end
 
 # d.cards.each do |card|
@@ -78,14 +75,14 @@ class Player
       @hand = []
       @hand_value = 0
       2.times do
-        card = $d.draw
+        card = $deck.draw
         @hand_value == 0 ? @hand_value = card.value.to_i : @hand_value += card.value.to_i
         @hand << card
       end
   end
 
   def hit
-    card = $d.draw
+    card = $deck.draw
     @hand_value == 0 ? @hand_value = card.value.to_i : @hand_value += card.value.to_i
     @hand << card
   end
@@ -103,10 +100,8 @@ class Player
 end
 #########################################################################
 
-# Testing the code
-$d = Deck.new
-$d.shuffle!
-puts "A new deck has been shuffled and there are #{$d.remaining} cards"
+$deck = Deck.new
+$deck.shuffle!
 
 player = Player.new
 puts "Player's hand:"
@@ -123,11 +118,11 @@ else
     puts "Do you want to hit(h) or stay(s)?"
     action = $stdin.gets.chomp
     if action == "h" 
-      puts "You chose to hit, here's your new hand"
+      puts "Your new hand is:"
       player.hit
       puts player.to_s
     else
-      puts "You chose to stay, here's your final hand"
+      puts "Your final hand is:"
       puts player.to_s
       break
     end
@@ -138,17 +133,15 @@ else
 
   if player.hand_value <= 23
     if player.hand_value > dealer.hand_value
-      puts "Player wins"
+      puts "Player wins!"
     elsif player.hand_value == dealer.hand_value
       puts "Dealer and Player tied"
     else
-      puts "Dealer wins"
+      puts "Dealer wins!"
     end
   else
-    puts "Player busts. Dealer wins"
+    puts "Player busts. Dealer wins!"
   end
 end
-
-puts "There are #{$d.remaining} cards in the deck"
 
   
