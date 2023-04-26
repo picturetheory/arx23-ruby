@@ -1,8 +1,7 @@
 ####################################################################
-#  Modified from BlackJack game implementation by Catharina Torok  #
-#  https://gist.github.com/ctorok/4243004                          #  
-#  Two players, Player and Dealer.                                 #
-#  Player gets to hit or stay. Dealer only gets dealt two cards.   #
+#  Arx23, the next big hit among DB card games!				       #
+#  Player gets to hit or stay. Dealer gets dealt two cards for     #
+#  testing purposes (implement dealer AI later).                   #
 ####################################################################
 
 Suits = ["Flasks","Sabers","Staves","Coins"]
